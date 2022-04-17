@@ -1,45 +1,37 @@
-job "guacamole" {
+job "qlc" {
   datacenters = ["dc1"]
   
-  group "guacamole" {
+  group "qlc" {
     count = 1
     update {
       max_parallel = 1
     }
     network {
       port "http" {
-        to = 8080
+        to = 9999
       }
     }
     service {
-        name = "guacamole"
+        name = "qlc"
         port = "http"
         tags = ["urlprefix-/"]
         check {
-            name     = "Guacamole HTTP"
+            name     = "QLC HTTP"
             type     = "http"
             path     = "/"
             interval = "10s"
             timeout  = "2s"
         }
     }
-    task "guacamole" {
+    task "qlc" {
       env {
-        #PUID=1000
-        #PGID=1000
         TZ="Europe/Stockholm"
       }
       driver = "docker"
-      resources {
-        cpu    = 100
-        memory = 512
-      }
+
       config {
-        image = "oznu/guacamole"
+        image = "binary1230/qlcplus"
         ports = ["http"]
-        volumes = [
-          "/home/nomad/guacamole:/config"
-        ]
       }
     }
   }
