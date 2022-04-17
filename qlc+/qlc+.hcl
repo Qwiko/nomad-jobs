@@ -32,6 +32,7 @@ job "qlc" {
       config {
         image = "binary1230/qlcplus"
         ports = ["http"]
+        args = ["/bin/sh", "-c", "/usr/bin/xvfb-run qlcplus --operate --web"]
       }
     }
   }
