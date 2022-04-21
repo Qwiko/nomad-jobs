@@ -7,7 +7,7 @@ job "promtail" {
     count = 1
     network {
       dns {
-        servers = ["172.17.0.1", "8.8.8.8", "8.8.4.4"]
+        servers = ["192.168.10.20"]
       }
       port "http" {
         static = 3200
