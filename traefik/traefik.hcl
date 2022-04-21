@@ -65,7 +65,7 @@ job "traefik" {
 [providers.consulCatalog]
     prefix           = "traefik"
     exposedByDefault = true
-    defaultRule      = "Host(`{{"{{.Name }}"}}.service.consul`)"
+    defaultRule      = "Host(`{{"{{.Name }}"}}.service.consul`)  || Host(`{{"{{.Name }}"}}.service`) || Host(`{{"{{.Name }}"}}.service.admin.pingstmellanbygden.se`)"
 
     [providers.consulCatalog.endpoint]
       address = "127.0.0.1:8500"
