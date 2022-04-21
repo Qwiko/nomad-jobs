@@ -7,13 +7,12 @@ job "grafana" {
 
     network {
       dns {
-        servers = ["172.17.0.1", "8.8.8.8", "8.8.4.4"]
+        servers = ["192.168.10.20"]
       }
       port "http" {
         static = 3000
       }
     }
-
     restart {
       attempts = 3
       delay    = "20s"
@@ -24,10 +23,10 @@ job "grafana" {
       driver = "docker"
 
       config {
-        image = "grafana/grafana:7.5.1"
+        image = "grafana/grafana"
         ports = ["http"]
         volumes = [
-          "/home/jakob/grafana:/var/lib/grafana"
+          "/home/nomad/grafana:/var/lib/grafana"
         ]
       }
 
@@ -81,9 +80,8 @@ EOTC
 
       resources {
         cpu    = 100
-        memory = 100
+        memory = 512
       }
-
       service {
         name = "grafana"
         port = "http"
