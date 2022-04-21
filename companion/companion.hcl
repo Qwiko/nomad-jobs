@@ -17,20 +17,21 @@ job "companion" {
         name = "companion"
         port = "http"
         tags = ["urlprefix-/"]
-        // check {
-        //     name     = "companion HTTP"
-        //     type     = "http"
-        //     path     = "/"
-        //     interval = "10s"
-        //     timeout  = "2s"
-        // }
+        check {
+            name     = "companion HTTP"
+            type     = "http"
+            path     = "/"
+            interval = "10s"
+            timeout  = "2s"
+        }
     }
     task "companion" {
       env {
-        // PUID=1000
-        // PGID=1000
-        COMPANION_CONFIG_BASEDIR="/companion"
         TZ="Europe/Stockholm"
+      }
+      resources {
+        cpu    = 100
+        memory = 512
       }
       driver = "docker"
 
